@@ -3,10 +3,14 @@ import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 
 export default defineConfig({
-  // TODO: replace with the final domain once purchased, or pass SITE=https://your-domain.com at build time.
-  site: process.env.SITE ?? "https://panaderialasdelicias.com",
-  // Set at build time for the floresnexus.cards/las-delicias preview deploy; defaults to root for the eventual standalone domain.
-  base: process.env.BASE_PATH ?? "/",
+  // Overridden at build time by the floresnexus-cards monorepo workflow
+  // (SITE_URL=https://floresnexus.cards). Falls back to this repo's own
+  // standalone GitHub Pages project site otherwise.
+  site: process.env.SITE_URL ?? "https://nexus-group-lap.github.io",
+  // Overridden at build time by the floresnexus-cards monorepo workflow
+  // (BASE_PATH=/las-delicias/). Falls back to this repo's own project-page
+  // path for standalone deploys.
+  base: process.env.BASE_PATH ?? "/las-delicias/",
   i18n: {
     locales: ["en", "es"],
     defaultLocale: "en",
