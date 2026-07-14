@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { MenuCategory } from "@/data/menu.ts";
+import { getLocalizedPath } from "@/i18n/utils.ts";
+import type { Lang } from "@/i18n/types.ts";
+
+const { category, count, lang = "en" as Lang, image } = Astro.props as {
+  category: MenuCategory;
+  count?: number;
+  lang?: Lang;
+  image?: ImageMetadata;
+};
+const itemCount = count ?? category.items.length;
+const dishWord = lang === "es" ? (itemCount === 1 ? "platillo" : "platillos") : itemCount === 1 ? "dish" : "dishes";
+---
+
+<a href={`${getLocalizedPath("/menu", lang)}#${category.id}`} class="group block space-y-4">
+  <div class="relative aspect-[4/3] overflow-hidden rounded-[min(1vw,12px)] bg-paper">
+    {
+      image ? (
+        <Image
+          src={image}
+          alt=""
+          class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          widths={[320, 480, 640]}
+          sizes="(min-width: 768px) 33vw, 100vw"
+        />
+      ) : null
+    }
+    <div
+      class:list={[
+        "flex h-full w-full flex-col items-center justify-center gap-2 transition-transform duration-700 group-hover:scale-[1.03]",
+        image && "absolute inset-0 bg-ink/40",
+      ]}
+    >
+      <span class:list={["font-serif text-5xl italic", image ? "text-[var(--color-base)]" : "text-accent"]}>
+        {itemCount}
+      </span>
+      <span class:list={["text-[10px] uppercase tracking-[0.3em]", image ? "text-[var(--color-base)]/75" : "text-faded"]}>
+        {dishWord}
+      </span>
+    </div>
+  </div>
+  <div class="flex items-start justify-between gap-4">
+    <h3 class="text-sm font-medium">{category.name[lang]}</h3>
+    <span aria-hidden="true" class="pt-0.5 text-sm text-faded transition-transform group-hover:translate-x-1">→</span>
+  </div>
+</a>

@@ -1,36 +1,18 @@
-# Atelier Kō - Minimalist Furniture Store Theme
-
-[![Atelier Kō theme preview](preview.webp)](https://atelier-ko-topaz.vercel.app/)
+# Panadería Las Delicias — Guatemalan Bakery & Restaurant
 
 ![Astro 6](https://img.shields.io/badge/Astro-6.4.8-ff5d01?style=for-the-badge&logo=astro&logoColor=white)
 ![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4.1-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=for-the-badge&logo=typescript&logoColor=white)
-![MIT License](https://img.shields.io/badge/License-MIT-27272a?style=for-the-badge)
 
-Preview: [https://atelier-ko-topaz.vercel.app/](https://atelier-ko-topaz.vercel.app/)
-
-Atelier Kō is a quiet, editorial Astro theme for a small furniture atelier or craft-led product catalogue. Fully static, with small JavaScript enhancements for the catalogue filters, product gallery, and local cart.
-
-## Features
-
-- Polished homepage with hero, featured products, material story, newsletter form, and footer
-- Catalogue page with client-side category and material filters, and price sorting
-- Static product detail pages generated from Markdown content with Zod-validated frontmatter
-- Product image gallery with thumbnail navigation
-- LocalStorage cart with quantity controls and a multi-step checkout preview
-- About page with workshop story, principles, image-led sections, and contact CTA
-- Astro-optimized images served in WebP with responsive widths
-- Self-hosted WOFF2 fonts (Inter, Instrument Serif) — no external requests
-- Full SEO: canonical URLs, Open Graph, Twitter cards, Product and Organization JSON-LD, sitemap, dynamic `robots.txt`
-- Accessible: skip-to-content link, ARIA labels, focus-managed mobile menu, semantic HTML
-- Strict TypeScript throughout
+Website for Panadería Las Delicias, a Guatemalan bakery and restaurant in Fort Myers, FL. Built on a static
+Astro theme, adapted for local SEO, two full language versions (English/Spanish) with a language switcher,
+delivery routes, and catering.
 
 ## Tech Stack
 
-- Astro 6
+- Astro 6 (static output)
 - Tailwind CSS 4
 - TypeScript (strict)
-- Static output
 
 ## Getting Started
 
@@ -45,92 +27,77 @@ Build for production:
 npm run build
 ```
 
-Preview the production build locally:
-
-```bash
-npm run preview
-```
-
-## Theme Setup
-
-Update the production URL before publishing:
+Set the production domain at build time once it's purchased:
 
 ```bash
 SITE=https://your-domain.com npm run build
 ```
 
-The configured `site` value is used for canonical URLs, sitemap generation, and `robots.txt`. The default preview site is `https://atelier-ko-topaz.vercel.app/`.
+## Languages (English / Spanish)
 
-Main content files:
+The site is fully split into two languages — no mixed-language ("Spanglish") copy on either version:
 
-- `src/content/products/*.md` — product catalogue entries, frontmatter, images, and descriptions
-- `src/content.config.ts` — product content collection schema
-- `src/data/products.ts` — helper utilities that read and sort product content
-- `src/layouts/BaseLayout.astro` — shared metadata, global shell, header/footer slots, and cart helper
-- `src/components/SiteHeader.astro` — navigation and cart badge
-- `src/components/SiteFooter.astro` — footer links and studio copy
-- `src/styles.css` — design tokens, Tailwind setup, and local font declarations
+- English lives at the root (`/`, `/menu`, `/bakery`, …).
+- Spanish lives under `/es` (`/es`, `/es/menu`, `/es/bakery`, …), configured via Astro's built-in `i18n`
+  routing in `astro.config.mjs`.
+- The header (and mobile menu) has an **EN / ES** button that always links to the equivalent page in the
+  other language, not just the homepage.
+- `src/i18n/en.ts` and `src/i18n/es.ts` hold every UI string, typed against `src/i18n/types.ts` so both
+  dictionaries are kept in sync (TypeScript errors if one language is missing a key).
+- `src/i18n/utils.ts` exposes `getDictionary(lang)`, `getLangFromUrl(url)`, and `getLocalizedPath(path, lang)`
+  (used to build nav links and the language-toggle target).
+- Each page's markup lives once in `src/components/views/*View.astro` (e.g. `HomeView.astro`), taking a
+  `lang` prop. The thin files in `src/pages/*.astro` and `src/pages/es/*.astro` just render the view with
+  `lang="en"` / `lang="es"` — so edit the view, not the page, when copy or layout changes.
+- `hreflang` alternate links and `<html lang>` are set automatically in `BaseLayout.astro`.
 
-## Adding Products
+To add or edit copy: update the matching key in **both** `en.ts` and `es.ts` — the `Dictionary` type will
+flag it if one is missed.
 
-Add one Markdown file per product in `src/content/products/`. The file name becomes the product URL slug, so `arvid-chair.md` becomes `/products/arvid-chair`.
+## Content Files
 
-```md
----
-name: Arvid Chair
-collection: Collection 01 — Seating
-category: Seating
-material: Ash
-price: 840
-shortDescription: Curved Ash
-dimensions: W 54 × D 56 × H 92 cm
-finish: Soap-Treated
-leadTime: 6–8 Weeks
-images:
-  - ../../assets/p-arvid-1.jpg
-  - ../../assets/p-arvid-2.jpg
-order: 2
----
-
-A single sculpted shell of steam-bent ash, the Arvid Chair traces the silhouette of the body.
-```
-
-Product images should live in `src/assets/` so Astro can optimize them. Categories and materials are derived automatically from the product files and appear as catalogue filters.
+- `src/data/site.ts` — name, address, phone, email, hours (bilingual), social links, and delivery cities (the
+  single source of truth for NAP data — update here, it propagates everywhere).
+- `src/data/menu.ts` — menu categories (bilingual names/notes) and dish names, used by `/menu` and the
+  homepage highlights. Dish names stay in Spanish in both language versions (standard for Latin restaurant
+  menus).
+- `src/layouts/BaseLayout.astro` — shared meta tags, Open Graph/Twitter tags, hreflang alternates, and
+  Restaurant/Bakery JSON-LD.
+- `src/components/SiteHeader.astro` / `SiteFooter.astro` — navigation, phone CTA, language toggle, and footer
+  NAP/social block.
+- `src/assets/gallery/` — real bakery/food photography, rendered via `astro:assets` `<Image>`.
+- `src/assets/stock/` — free-license Pexels photos (dough-kneading hands, catering trays) used where no real
+  photo exists yet.
+- `src/styles.css` — design tokens (cream/beige bakery palette + blue accent) and local fonts.
 
 ## Pages
 
-- `/` — Homepage
-- `/catalog` — Full catalogue with filters
-- `/products/[slug]` — Product detail
-- `/about` — Studio story
-- `/cart` — Cart and checkout preview
+| English    | Spanish        | Content                                  |
+| ---------- | -------------- | ----------------------------------------- |
+| `/`        | `/es`          | Home                                       |
+| `/menu`    | `/es/menu`     | Full menu by category                      |
+| `/bakery`  | `/es/bakery`   | Bakery story                               |
+| `/delivery`| `/es/delivery` | Delivery routes & cities                   |
+| `/catering`| `/es/catering` | Catering & event orders                    |
+| `/gallery` | `/es/gallery`  | Photo gallery (real bakery & food photos)  |
+| `/contact` | `/es/contact`  | Address, phone, hours, social links        |
 
-## Images and Fonts
+## Known Pending Items
 
-Theme images live in `src/assets` and render through Astro's image pipeline. Local fonts live in `src/assets/fonts`; only the weights and styles used by the theme are included.
-
-Use `public/` only for files that should be served as-is.
+- Real photography for the storefront facade and delivery vans — the home hero and delivery pages still use
+  stand-in imagery (bread close-up / no image) since no real photo of the building or vans exists yet.
+- Final logo file (SVG/PNG transparent) — replace `public/favicon.svg`.
+- Confirmed current menu pricing, delivery schedules per city, catering minimums/lead time, and accepted
+  payment methods.
+- Final production domain — update `astro.config.mjs` (`site`) and `src/pages/robots.txt.js`.
 
 ## SEO
 
-- Unique page titles and descriptions
-- Canonical URLs
-- Open Graph and Twitter card metadata
-- Sitemap generation via `@astrojs/sitemap`
+- Canonical URLs, Open Graph, Twitter cards
+- Restaurant + Bakery JSON-LD (schema.org) on every page, sourced from `src/data/site.ts`
+- Sitemap via `@astrojs/sitemap`
 - Dynamic `robots.txt`
-- Product JSON-LD on product pages
-- Organization JSON-LD on the homepage
-- `noindex` on cart and 404
-
-## Deployment
-
-The theme builds to static files in `dist/` and deploys to any static host. Set `SITE` to the production origin during deployment so SEO URLs are correct.
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-## Notes
-
-- Replace the demo product copy, prices, and images with your own catalogue before publishing.
-- The newsletter and checkout flows are design previews; connect them to your preferred backend or form provider if needed.

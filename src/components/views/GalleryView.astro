@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getDictionary } from "@/i18n/utils.ts";
+import type { Lang } from "@/i18n/types.ts";
+import panfrances from "@/assets/gallery/panfrances.jpg";
+import conchapan from "@/assets/gallery/conchapan.jpg";
+import conchas from "@/assets/gallery/conchas.png";
+import conchas2 from "@/assets/gallery/conchas-2.png";
+import panSellado from "@/assets/gallery/pan-sellado.png";
+import pandeyema from "@/assets/gallery/pandeyema.jpg";
+import mostrador from "@/assets/gallery/mostrador.png";
+import pan3 from "@/assets/gallery/pan3.png";
+import pan4 from "@/assets/gallery/pan4.png";
+import caldodepollo from "@/assets/gallery/caldodepollo.jpg";
+import flautas from "@/assets/gallery/flautas.jpg";
+import fajitasmixtas from "@/assets/gallery/fajitasmixtas.jpg";
+import quesadilla from "@/assets/gallery/quesadilla.jpg";
+import comida from "@/assets/gallery/comida.png";
+import pastelCumpleanos from "@/assets/gallery/pastel-de-cumpleanos.png";
+import pastelCumpleanos2 from "@/assets/gallery/pastel-de-cumpleanos-2.png";
+import local from "@/assets/gallery/local.png";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getDictionary(lang);
+
+const galleryImages = [
+  panfrances,
+  conchapan,
+  conchas,
+  conchas2,
+  panSellado,
+  pandeyema,
+  mostrador,
+  pan3,
+  pan4,
+  caldodepollo,
+  flautas,
+  fajitasmixtas,
+  quesadilla,
+  comida,
+  pastelCumpleanos,
+  pastelCumpleanos2,
+  local,
+];
+---
+
+<BaseLayout lang={lang} title={t.meta.gallery.title} description={t.meta.gallery.description}>
+  <main id="main-content">
+  <section class="mx-auto max-w-screen-xl px-6 pb-12 pt-20 md:pb-16 md:pt-28">
+    <p class="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-faded">
+      <span class="inline-block h-px w-8 bg-ink/40"></span>
+      {t.gallery.kicker}
+    </p>
+    <h1 class="max-w-[20ch] text-balance font-serif text-5xl leading-[0.95] md:text-6xl">
+      {t.gallery.heading} <span class="italic text-accent">{t.gallery.headingAccent}</span>
+    </h1>
+    <p class="mt-6 max-w-[56ch] leading-relaxed text-faded">{t.gallery.intro}</p>
+  </section>
+
+  <div class="mx-auto max-w-screen-xl px-6 pb-32">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
+      {
+        t.gallery.items.map((label, i) => (
+          <Image
+            src={galleryImages[i]}
+            alt={label}
+            class="aspect-square w-full rounded-[min(1vw,12px)] object-cover"
+            widths={[320, 480, 640]}
+            sizes="(min-width: 768px) 25vw, (min-width: 640px) 50vw, 100vw"
+          />
+        ))
+      }
+    </div>
+  </div>
+  </main>
+</BaseLayout>

@@ -1,6 +1,6 @@
 @import "tailwindcss" source(none);
 
-@source "./**/*.{astro,js}";
+@source "./**/*.{astro,js,tsx}";
 
 @font-face {
   font-family: "Inter";
@@ -121,12 +121,13 @@
 }
 
 :root {
-  --base: #f8f7f4;
-  --paper: #f1efea;
-  --ink: #27272a;
-  --faded: #71717a;
-  --accent: #5a2d10;
-  --line: #27272a14;
+  /* Warm bakery cream/beige base, paired with a Guatemala-flag blue accent. */
+  --base: #fbf7ee;
+  --paper: #f3ecdd;
+  --ink: #2a2420;
+  --faded: #6b6459;
+  --accent: #2e6da4;
+  --line: #2a242014;
   --radius: 12px;
 }
 
@@ -173,15 +174,82 @@
   font-family: var(--font-sans);
 }
 
-@keyframes atelier-fade-in {
-  from {
-    opacity: 0;
+@keyframes delivery-pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.55;
   }
-  to {
-    opacity: 1;
+  70%,
+  100% {
+    transform: scale(4.5);
+    opacity: 0;
   }
 }
 
-.atelier-fade-in {
-  animation: atelier-fade-in 700ms ease both;
+/* Unlayered on purpose: wins over Tailwind's utility-layer `transition-colors`
+   so pill buttons across the site pick up a lift + press motion without
+   every callsite having to opt in individually. */
+a.rounded-full,
+button.rounded-full,
+.menu-chip {
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+a.rounded-full:hover,
+button.rounded-full:hover,
+.menu-chip:hover {
+  transform: translateY(-2px) scale(1.035);
+  box-shadow: 0 12px 26px -14px color-mix(in oklab, var(--ink) 55%, transparent);
+}
+
+a.rounded-full:active,
+button.rounded-full:active,
+.menu-chip:active {
+  transform: translateY(0) scale(0.96);
+  transition-duration: 100ms;
+  box-shadow: 0 4px 10px -6px color-mix(in oklab, var(--ink) 45%, transparent);
+}
+
+a.rounded-full:focus-visible,
+button.rounded-full:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Subtle shine sweep on the primary (dark-fill) call-to-action pills.
+   Excludes .tiktok-bubble: it needs to stay `position: fixed`, and forcing
+   `overflow: hidden` here would clip its outward pulse rings. */
+a.rounded-full.bg-ink:not(.tiktok-bubble),
+button.rounded-full.bg-ink:not(.tiktok-bubble) {
+  position: relative;
+  overflow: hidden;
+}
+
+a.rounded-full.bg-ink:not(.tiktok-bubble)::after,
+button.rounded-full.bg-ink:not(.tiktok-bubble)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 40%, color-mix(in oklab, white 35%, transparent) 50%, transparent 60%);
+  transform: translateX(-120%);
+  transition: transform 550ms ease;
+  pointer-events: none;
+}
+
+a.rounded-full.bg-ink:not(.tiktok-bubble):hover::after,
+button.rounded-full.bg-ink:not(.tiktok-bubble):hover::after {
+  transform: translateX(120%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

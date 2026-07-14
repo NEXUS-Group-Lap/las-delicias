@@ -1,32 +1,78 @@
 ---
+import { Image } from "astro:assets";
+import { site } from "@/data/site.ts";
+import { getDictionary, getLocalizedPath } from "@/i18n/utils.ts";
+import type { Lang } from "@/i18n/types.ts";
+import logo from "@/assets/brand/logo.png";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getDictionary(lang);
 const year = new Date().getFullYear();
+const path = (base: string) => getLocalizedPath(base, lang);
 ---
 
-<footer id="studio" class="mt-32 border-t border-line py-24">
-  <div class="mx-auto grid max-w-screen-xl grid-cols-1 gap-12 px-6 md:grid-cols-3">
-    <div class="space-y-4">
-      <div class="font-serif text-lg italic tracking-tight">Atelier Kō</div>
-      <p class="max-w-[30ch] text-sm leading-relaxed text-faded">
-        Sustainable furniture designed and made by hand in Småland, Sweden.
-      </p>
+<footer class="mt-32 border-t border-line py-24">
+  <div class="mx-auto grid max-w-screen-xl grid-cols-1 gap-12 px-6 md:grid-cols-4">
+    <div class="space-y-4 md:col-span-2">
+      <div class="flex items-center gap-3">
+        <Image src={logo} alt="" class="h-12 w-12 rounded-full object-cover" widths={[48, 96]} sizes="48px" />
+        <div class="font-serif text-lg italic tracking-tight">{site.name}</div>
+      </div>
+      <p class="max-w-[36ch] text-sm leading-relaxed text-faded">{site.tagline[lang]}</p>
+      <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" class="block text-sm text-faded transition-colors hover:text-accent">
+        {site.address.full}
+      </a>
+      <a href={site.phone.href} class="block text-sm text-faded transition-colors hover:text-accent">
+        {site.phone.display}
+      </a>
+      <a href={site.email.href} class="block text-sm text-faded transition-colors hover:text-accent">
+        {site.email.display}
+      </a>
     </div>
     <div class="space-y-4">
-      <h2 class="text-xs font-medium uppercase tracking-widest">Inquiries</h2>
-      <ul class="space-y-2 text-sm">
-        <li><a href="/about#studio" class="text-faded transition-colors hover:text-ink">Custom Orders</a></li>
-        <li><a href="/about#studio" class="text-faded transition-colors hover:text-ink">Trade Portal</a></li>
-        <li><a href="/about#studio" class="text-faded transition-colors hover:text-ink">Studio Visits</a></li>
+      <h2 class="text-xs font-medium uppercase tracking-widest">{t.footer.hoursTitle}</h2>
+      <ul class="space-y-2 text-sm text-faded">
+        {
+          site.hours.map((entry) => (
+            <li>
+              <span class="block text-ink">{entry.days[lang]}</span>
+              <span class="text-xs">{entry.hours}</span>
+            </li>
+          ))
+        }
       </ul>
     </div>
     <div class="space-y-4">
-      <h2 class="text-xs font-medium uppercase tracking-widest">Follow</h2>
+      <h2 class="text-xs font-medium uppercase tracking-widest">{t.footer.menuTitle}</h2>
       <ul class="space-y-2 text-sm">
-        <li><a href="https://www.instagram.com/" class="text-faded transition-colors hover:text-ink">Instagram</a></li>
-        <li><a href="/about" class="text-faded transition-colors hover:text-ink">Journal</a></li>
+        <li><a href={path("/menu")} class="text-faded transition-colors hover:text-accent">{t.footer.fullMenu}</a></li>
+        <li><a href={path("/catering")} class="text-faded transition-colors hover:text-accent">{t.footer.catering}</a></li>
+        <li><a href={path("/delivery")} class="text-faded transition-colors hover:text-accent">{t.footer.deliveryRoutes}</a></li>
+        <li><a href={path("/contact")} class="text-faded transition-colors hover:text-accent">{t.footer.contact}</a></li>
+      </ul>
+      <h2 class="pt-2 text-xs font-medium uppercase tracking-widest">{t.footer.followTitle}</h2>
+      <ul class="space-y-2 text-sm">
+        <li><a href={site.social.facebook} target="_blank" rel="noopener noreferrer" class="text-faded transition-colors hover:text-accent">Facebook</a></li>
+        <li><a href={site.social.instagram} target="_blank" rel="noopener noreferrer" class="text-faded transition-colors hover:text-accent">Instagram</a></li>
+        <li><a href={site.social.tiktok} target="_blank" rel="noopener noreferrer" class="text-faded transition-colors hover:text-accent">TikTok</a></li>
       </ul>
     </div>
   </div>
   <div class="mx-auto mt-16 max-w-screen-xl px-6 text-[10px] uppercase tracking-[0.2em] text-faded">
-    © {year} Atelier Kō — All pieces made to order.
+    <p>© {year} {site.name} — {site.tagline[lang]}</p>
+    <p class="mt-2">
+      <a
+        href="https://floresnexus.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="transition-colors hover:text-accent"
+      >
+        {t.footer.credit}
+      </a>
+    </p>
   </div>
 </footer>

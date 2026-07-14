@@ -1,0 +1,285 @@
+---
+import { Image, getImage } from "astro:assets";
+import { AnimatedText } from "@/components/ui/animated-text";
+import { ImagePlayer } from "@/components/ui/image-player";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/data/site.ts";
+import { getDictionary, getLocalizedPath } from "@/i18n/utils.ts";
+import type { Lang } from "@/i18n/types.ts";
+import heroPhoto from "@/assets/gallery/herophoto.png";
+import breadCase from "@/assets/gallery/conchapan.jpg";
+import breadTrays from "@/assets/gallery/conchas.png";
+import breadSellado from "@/assets/gallery/pan-sellado.png";
+import breadCounter from "@/assets/gallery/mostrador.png";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getDictionary(lang);
+const path = (base: string) => getLocalizedPath(base, lang);
+const photo = (en: string, es: string) => (lang === "es" ? `Foto: ${es}` : `Photo: ${en}`);
+
+const bakeryPlayerImages = await Promise.all(
+  [breadCase, breadTrays, breadSellado, breadCounter].map(async (src) => {
+    const optimized = await getImage({ src, width: 1080, format: "webp" });
+    return optimized.src;
+  }),
+);
+---
+
+<BaseLayout lang={lang} title={t.meta.home.title} description={t.meta.home.description}>
+  <main id="main-content">
+  <h1 class="sr-only">{t.meta.home.title}</h1>
+  <section class="relative overflow-hidden bg-base">
+    <div class="lg:hidden">
+      <Image src={heroPhoto} alt={photo("Fresh bread case at Panadería Las Delicias", "Vitrina de pan fresco en Panadería Las Delicias")} class="aspect-[4/3] w-full object-cover object-top" widths={[480, 768]} sizes="100vw" />
+      <div class="space-y-6 px-6 py-12">
+        <p class="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-faded">
+          <span class="inline-block h-px w-8 bg-ink/40"></span>
+          {t.home.heroKicker}
+        </p>
+        <p class="text-balance font-serif text-4xl leading-[0.95]">
+          {t.home.heroHeading}
+          <br />
+          <span class="italic text-accent">{t.home.heroHeadingAccent}</span>
+        </p>
+        <p class="max-w-[48ch] text-pretty leading-relaxed text-faded">
+          {t.home.heroSub} {site.address.full}.
+        </p>
+        <p class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-ink">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0 text-accent">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+          <span>{t.home.hoursNote}</span>
+        </p>
+        <div class="flex flex-col items-start gap-4 pt-2">
+          <div class="flex flex-wrap items-center gap-3">
+            <a
+              href={site.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+            >
+              {t.common.getDirections}
+              <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+            </a>
+            <a
+              href={path("/menu")}
+              class="inline-flex items-center gap-3 rounded-full px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+            >
+              {t.common.viewMenu} →
+            </a>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.2em] text-faded">
+            <a href={site.phone.href} class="transition-colors hover:text-accent">{t.common.callNow} →</a>
+            <a href={path("/delivery")} class="transition-colors hover:text-accent">{t.home.ctaDelivery} →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative hidden h-[88vh] max-h-[820px] min-h-[600px] w-full lg:block">
+      <Image src={heroPhoto} alt={photo("Fresh bread case at Panadería Las Delicias", "Vitrina de pan fresco en Panadería Las Delicias")} class="absolute inset-0 h-full w-full object-cover object-top" widths={[960, 1440, 1920]} sizes="100vw" priority />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0"
+        style="background: linear-gradient(90deg, var(--color-base) 0%, var(--color-base) 30%, color-mix(in oklab, var(--color-base) 55%, transparent) 45%, color-mix(in oklab, var(--color-base) 5%, transparent) 65%, transparent 80%)"
+      >
+      </div>
+      <div class="relative mx-auto flex h-full max-w-screen-xl items-center px-6">
+        <div class="max-w-[520px] space-y-8">
+          <p class="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-faded">
+            <span class="inline-block h-px w-8 bg-ink/40"></span>
+            {t.home.heroKicker}
+          </p>
+          <p class="text-balance font-serif text-5xl leading-[0.95] lg:text-6xl">
+            {t.home.heroHeading}
+            <br />
+            <span class="italic text-accent">{t.home.heroHeadingAccent}</span>
+          </p>
+          <p class="max-w-[48ch] text-pretty leading-relaxed text-faded md:text-lg">
+            {t.home.heroSub} {site.address.full}.
+          </p>
+          <p class="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-ink">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0 text-accent">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+            <span>{t.home.hoursNote}</span>
+          </p>
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a
+              href={site.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+            >
+              {t.common.getDirections}
+              <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+            </a>
+            <a
+              href={path("/menu")}
+              class="inline-flex items-center gap-3 rounded-full px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+            >
+              {t.common.viewMenu} →
+            </a>
+            <a
+              href={site.phone.href}
+              class="inline-flex items-center gap-2 rounded-full bg-base/90 px-5 py-3 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line backdrop-blur-sm transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+            >
+              {t.common.callNow} →
+            </a>
+            <a
+              href={path("/delivery")}
+              class="inline-flex items-center gap-2 rounded-full bg-base/90 px-5 py-3 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line backdrop-blur-sm transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+            >
+              {t.home.ctaDelivery} →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-screen-xl px-6 pt-24 md:pt-32">
+    <div class="border-t border-line pt-10">
+      <p class="mb-4 text-[11px] uppercase tracking-[0.3em] text-faded">{t.home.featuredKicker}</p>
+      <h2 class="max-w-[22ch] text-balance font-serif text-3xl md:text-5xl">
+        {t.home.featuredHeading} <span class="italic text-accent">{t.home.featuredHeadingAccent}</span>
+      </h2>
+    </div>
+
+    <div class="mt-16 flex flex-col items-center gap-10 py-8 text-center md:py-16">
+      <AnimatedText
+        client:visible
+        as="p"
+        text={t.home.menuInvite}
+        textClassName="max-w-[26ch] font-serif text-2xl italic text-ink md:text-4xl"
+        underlineOffset="-bottom-4"
+      />
+      <a
+        href={path("/menu")}
+        class="group inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+      >
+        {t.home.viewFullMenu}
+        <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="mt-32 md:mt-48">
+    <div class="mx-auto max-w-screen-2xl px-6">
+      <div class="grid items-center gap-10 md:grid-cols-12 md:gap-16">
+        <div class="md:col-span-7 lg:col-span-8">
+          <a href={path("/bakery")} class="group relative block aspect-[5/4] overflow-hidden rounded-[min(1vw,16px)] md:aspect-[16/11]">
+            <span class="sr-only">{photo("Fresh bread & bakery case", "Pan fresco y vitrina de la panadería")}</span>
+            <ImagePlayer
+              client:visible
+              images={bakeryPlayerImages}
+              interval={4200}
+              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            />
+            <div
+              aria-hidden="true"
+              class="absolute inset-0 hidden md:block"
+              style="background: linear-gradient(270deg, var(--color-base) 0%, var(--color-base) 30%, color-mix(in oklab, var(--color-base) 55%, transparent) 45%, color-mix(in oklab, var(--color-base) 5%, transparent) 65%, transparent 80%)"
+            >
+            </div>
+          </a>
+        </div>
+        <div class="space-y-6 md:col-span-5 lg:col-span-4">
+          <p class="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-faded">
+            <span class="inline-block h-px w-8 bg-ink/40"></span>
+            {t.home.bakeryKicker}
+          </p>
+          <h2 class="text-balance font-serif text-4xl leading-[1.02] md:text-5xl">
+            {t.home.bakeryHeading} <span class="italic text-accent">{t.home.bakeryHeadingAccent}</span>
+          </h2>
+          <p class="text-pretty leading-relaxed text-faded">{t.home.bakeryBody}</p>
+          <a
+            href={path("/bakery")}
+            class="inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+          >
+            {t.home.seeBakery} →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-32 max-w-screen-xl px-6 md:mt-48">
+    <div class="border-t border-line pt-12">
+      <p class="mb-4 text-[11px] uppercase tracking-[0.3em] text-faded">{t.home.differenceKicker}</p>
+      <h2 class="mb-12 max-w-[24ch] text-balance font-serif text-3xl md:text-5xl">
+        {t.home.differenceHeading} <span class="italic text-accent">{t.home.differenceHeadingAccent}</span>
+      </h2>
+      <div class="grid gap-x-8 gap-y-10 md:grid-cols-3">
+        {
+          t.home.differenceCols.map((block) => (
+            <div class="space-y-3 pt-2">
+              <p class="text-[10px] uppercase tracking-[0.3em] text-faded">{block.tag}</p>
+              <h3 class="font-serif text-2xl">{block.name}</h3>
+              <p class="text-sm leading-relaxed text-faded">{block.copy}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto mt-32 max-w-screen-xl px-6 md:mt-48">
+    <div class="grid gap-10 border-t border-line pt-12 md:grid-cols-2 md:gap-16">
+      <div class="space-y-5">
+        <p class="text-[11px] uppercase tracking-[0.3em] text-faded">{t.home.deliveryKicker}</p>
+        <h2 class="text-balance font-serif text-3xl leading-[1.05] md:text-4xl">
+          {t.home.deliveryHeading} <span class="italic text-accent">{t.home.deliveryHeadingAccent}</span>
+        </h2>
+        <p class="leading-relaxed text-faded">{t.home.deliveryBody}</p>
+        <a href={path("/delivery")} class="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-ink underline underline-offset-4 transition-colors hover:text-accent">
+          {t.home.seeCities} →
+        </a>
+      </div>
+      <div class="space-y-5">
+        <p class="text-[11px] uppercase tracking-[0.3em] text-faded">{t.home.cateringKicker}</p>
+        <h2 class="text-balance font-serif text-3xl leading-[1.05] md:text-4xl">
+          {t.home.cateringHeading} <span class="italic text-accent">{t.home.cateringHeadingAccent}</span>
+        </h2>
+        <p class="leading-relaxed text-faded">{t.home.cateringBody}</p>
+        <a href={path("/catering")} class="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-ink underline underline-offset-4 transition-colors hover:text-accent">
+          {t.home.orderCateringLink} →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto mb-32 mt-32 max-w-screen-xl px-6 md:mt-48">
+    <div class="grid items-end gap-10 border-t border-line pt-12 md:grid-cols-12">
+      <div class="md:col-span-7">
+        <h2 class="max-w-[24ch] text-balance font-serif text-3xl leading-[1.02] md:text-5xl">
+          {t.home.visitHeading}
+        </h2>
+        <p class="mt-4 max-w-[48ch] leading-relaxed text-faded">{site.address.full}</p>
+      </div>
+      <div class="flex flex-col gap-4 sm:flex-row md:col-span-5 md:justify-end">
+        <a
+          href={site.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+        >
+          {t.common.getDirections} →
+        </a>
+        <a
+          href={site.phone.href}
+          class="inline-flex items-center justify-center gap-3 rounded-full px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+        >
+          {t.common.callNow} — {site.phone.display}
+        </a>
+      </div>
+    </div>
+  </section>
+  </main>
+</BaseLayout>

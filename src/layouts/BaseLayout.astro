@@ -2,36 +2,83 @@
 import "../styles.css";
 import SiteFooter from "@/components/SiteFooter.astro";
 import SiteHeader from "@/components/SiteHeader.astro";
+import TikTokBubble from "@/components/TikTokBubble.astro";
+import { site } from "@/data/site.ts";
+import { getLocalizedPath } from "@/i18n/utils.ts";
+import type { Lang } from "@/i18n/types.ts";
+
+interface Props {
+  lang?: Lang;
+  title?: string;
+  description?: string;
+  image?: { src: string } | string;
+  noindex?: boolean;
+  includeHeader?: boolean;
+  includeFooter?: boolean;
+}
 
 const {
-  title = "Atelier Kō — Hand-made furniture from the northern woods",
-  description = "A small Swedish atelier crafting solid oak, ash and walnut furniture by hand. Made to order in Småland.",
+  lang = "en",
+  title = `${site.name} | ${site.tagline[lang]}`,
+  description = `Visit ${site.name} in Fort Myers, FL for fresh Guatemalan bread, traditional breakfasts, Latin dishes, delivery routes, and catering for events.`,
   image,
   noindex = false,
   includeHeader = true,
   includeFooter = true,
-} = Astro.props;
+} = Astro.props as Props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
-const ogImage = image ? new URL(image.src ?? image, Astro.site ?? Astro.url.origin).href : undefined;
+const ogImage = image
+  ? new URL(typeof image === "string" ? image : image.src, Astro.site ?? Astro.url.origin).href
+  : undefined;
+const enPath = getLocalizedPath(Astro.url.pathname, "en");
+const esPath = getLocalizedPath(Astro.url.pathname, "es");
+const origin = Astro.site ?? Astro.url.origin;
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["Restaurant", "Bakery"],
+  name: site.name,
+  description:
+    lang === "es"
+      ? "Panadería y restaurante guatemalteco en Fort Myers, Florida. Pan guatemalteco fresco, comida tradicional, rutas de delivery y catering para eventos."
+      : "Guatemalan bakery and restaurant in Fort Myers, Florida serving fresh Guatemalan bread, traditional food, delivery routes, and catering for events.",
+  telephone: "+12399906760",
+  email: site.email.display,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  servesCuisine: ["Guatemalan", "Latin American", "Mexican"],
+  openingHours: site.openingHoursSpec,
+  url: Astro.site?.href ?? canonicalUrl.origin,
+  sameAs: [site.social.facebook, site.social.instagram, site.social.tiktok],
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Atelier Kō" />
-    <meta name="theme-color" content="#f8f7f4" />
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#fbf7ee" />
     <link rel="canonical" href={canonicalUrl.href} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" hreflang="en" href={new URL(enPath, origin).href} />
+    <link rel="alternate" hreflang="es" href={new URL(esPath, origin).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(enPath, origin).href} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/favicon.svg`} />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
 
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="Atelier Kō" />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl.href} />
     {ogImage && <meta property="og:image" content={ogImage} />}
@@ -40,85 +87,20 @@ const ogImage = image ? new URL(image.src ?? image, Astro.site ?? Astro.url.orig
     <meta name="twitter:description" content={description} />
     {ogImage && <meta name="twitter:image" content={ogImage} />}
 
-    <script is:inline>
-      (() => {
-        const storageKey = "atelier-ko-cart";
-
-        function readCart() {
-          try {
-            return JSON.parse(window.localStorage.getItem(storageKey) || "[]");
-          } catch {
-            return [];
-          }
-        }
-
-        function writeCart(items) {
-          window.localStorage.setItem(storageKey, JSON.stringify(items));
-          document.dispatchEvent(new CustomEvent("atelier-cart-change", { detail: items }));
-        }
-
-        function count(items = readCart()) {
-          return items.reduce((total, item) => total + Number(item.quantity || 0), 0);
-        }
-
-        function updateBadges() {
-          const total = count();
-          document.querySelectorAll("[data-cart-count]").forEach((node) => {
-            node.textContent = `(${total})`;
-          });
-          document.querySelectorAll("[data-cart-label]").forEach((node) => {
-            node.setAttribute("aria-label", `Cart, ${total} ${total === 1 ? "item" : "items"}`);
-          });
-        }
-
-        window.AtelierCart = {
-          read: readCart,
-          write: writeCart,
-          count,
-          add(slug, quantity = 1) {
-            const items = readCart();
-            const existing = items.find((item) => item.slug === slug);
-            if (existing) {
-              existing.quantity += quantity;
-              writeCart(items);
-              return;
-            }
-            writeCart([...items, { slug, quantity }]);
-          },
-          remove(slug) {
-            writeCart(readCart().filter((item) => item.slug !== slug));
-          },
-          setQuantity(slug, quantity) {
-            if (quantity <= 0) {
-              this.remove(slug);
-              return;
-            }
-            writeCart(readCart().map((item) => (item.slug === slug ? { ...item, quantity } : item)));
-          },
-          updateBadges,
-        };
-
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", updateBadges);
-        } else {
-          updateBadges();
-        }
-        window.addEventListener("storage", updateBadges);
-        document.addEventListener("atelier-cart-change", updateBadges);
-      })();
-    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
   </head>
   <body class="bg-base text-ink">
     <a
       href="#main-content"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-[var(--color-base)]"
     >
-      Skip to content
+      {lang === "es" ? "Saltar al contenido" : "Skip to content"}
     </a>
-    {includeHeader && <SiteHeader currentPath={Astro.url.pathname} />}
+    {includeHeader && <SiteHeader currentPath={Astro.url.pathname} lang={lang} />}
     <div>
       <slot />
     </div>
-    {includeFooter && <SiteFooter />}
+    {includeFooter && <SiteFooter lang={lang} />}
+    <TikTokBubble lang={lang} />
   </body>
 </html>

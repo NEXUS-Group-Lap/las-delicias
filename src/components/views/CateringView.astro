@@ -1,0 +1,102 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/data/site.ts";
+import { getDictionary, getLocalizedPath } from "@/i18n/utils.ts";
+import type { Lang } from "@/i18n/types.ts";
+import cateringHero from "@/assets/stock/catering-spread.jpg";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getDictionary(lang);
+const path = (base: string) => getLocalizedPath(base, lang);
+const photo = (en: string, es: string) => (lang === "es" ? `Foto: ${es}` : `Photo: ${en}`);
+---
+
+<BaseLayout lang={lang} title={t.meta.catering.title} description={t.meta.catering.description}>
+  <main id="main-content">
+  <section class="mx-auto max-w-screen-xl px-6 pb-12 pt-20 md:pb-16 md:pt-28">
+    <p class="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-faded">
+      <span class="inline-block h-px w-8 bg-ink/40"></span>
+      {t.catering.kicker}
+    </p>
+    <h1 class="max-w-[22ch] text-balance font-serif text-5xl leading-[0.95] md:text-6xl">
+      {t.catering.heading} <span class="italic text-accent">{t.catering.headingAccent}</span>
+    </h1>
+    <p class="mt-6 max-w-[62ch] text-lg leading-relaxed text-faded">{t.catering.intro}</p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href={site.phone.href}
+        class="inline-flex items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+      >
+        {t.common.orderCatering} — {site.phone.display}
+      </a>
+      <a
+        href={site.email.href}
+        class="inline-flex items-center justify-center gap-3 rounded-full px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+      >
+        {t.common.emailUs}
+      </a>
+    </div>
+  </section>
+
+  <section class="relative w-full">
+    <Image
+      src={cateringHero}
+      alt={photo("Catering trays for an event", "Bandejas de catering para un evento")}
+      class="h-[40vh] w-full object-cover md:h-[55vh]"
+      widths={[768, 1200, 1920]}
+      sizes="100vw"
+    />
+  </section>
+
+  <section class="mx-auto mt-24 max-w-screen-xl px-6 md:mt-32">
+    <p class="mb-8 text-[11px] uppercase tracking-[0.3em] text-faded">{t.catering.occasionsTitle}</p>
+    <div class="grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-3">
+      {
+        t.catering.occasions.map((occasion) => (
+          <div class="space-y-1 border-t border-line pt-4">
+            <p class="font-serif text-xl">{occasion.name}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto mb-32 mt-24 max-w-screen-xl border-t border-line px-6 pt-12 md:mt-32">
+    <div class="grid items-end gap-10 md:grid-cols-12">
+      <div class="md:col-span-7">
+        <h2 class="max-w-[24ch] text-balance font-serif text-3xl leading-[1.02] md:text-5xl">
+          {t.catering.endingHeading}
+        </h2>
+        <p class="mt-4 max-w-[48ch] leading-relaxed text-faded">{t.catering.endingBody}</p>
+      </div>
+      <div class="flex flex-col flex-wrap gap-4 sm:flex-row md:col-span-5 md:justify-end">
+        <a
+          href={site.phone.href}
+          class="inline-flex items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+        >
+          {t.common.callNow}
+        </a>
+        <a
+          href={path("/menu")}
+          class="inline-flex items-center justify-center gap-3 rounded-full px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+        >
+          {t.common.viewMenu}
+        </a>
+        <a
+          href={site.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-3 rounded-full px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+        >
+          {t.common.getDirections} →
+        </a>
+      </div>
+    </div>
+  </section>
+  </main>
+</BaseLayout>
