@@ -11,6 +11,11 @@ import breadCase from "@/assets/gallery/conchapan.jpg";
 import breadTrays from "@/assets/gallery/conchas.png";
 import breadSellado from "@/assets/gallery/pan-sellado.png";
 import breadCounter from "@/assets/gallery/mostrador.png";
+import comida from "@/assets/gallery/comida.png";
+import caldo from "@/assets/gallery/caldodepollo.jpg";
+import fajitas from "@/assets/gallery/fajitasmixtas.jpg";
+import flautas from "@/assets/gallery/flautas.jpg";
+import pandeyema from "@/assets/gallery/pandeyema.jpg";
 
 interface Props {
   lang?: Lang;
@@ -24,6 +29,13 @@ const photo = (en: string, es: string) => (lang === "es" ? `Foto: ${es}` : `Phot
 const bakeryPlayerImages = await Promise.all(
   [breadCase, breadTrays, breadSellado, breadCounter].map(async (src) => {
     const optimized = await getImage({ src, width: 1080, format: "webp" });
+    return optimized.src;
+  }),
+);
+
+const menuPlayerImages = await Promise.all(
+  [comida, caldo, fajitas, flautas, pandeyema].map(async (src) => {
+    const optimized = await getImage({ src, width: 1600, format: "webp" });
     return optimized.src;
   }),
 );
@@ -144,29 +156,43 @@ const bakeryPlayerImages = await Promise.all(
     </div>
   </section>
 
-  <section class="mx-auto max-w-screen-xl px-6 pt-24 md:pt-32">
-    <div class="border-t border-line pt-10">
-      <p class="mb-4 text-[11px] uppercase tracking-[0.3em] text-faded">{t.home.featuredKicker}</p>
-      <h2 class="max-w-[22ch] text-balance font-serif text-3xl md:text-5xl">
-        {t.home.featuredHeading} <span class="italic text-accent">{t.home.featuredHeadingAccent}</span>
-      </h2>
+  <section class="relative mt-24 overflow-hidden md:mt-32">
+    <div aria-hidden="true" class="absolute inset-0">
+      <ImagePlayer
+        client:visible
+        images={menuPlayerImages}
+        interval={5000}
+        alt=""
+        className="h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-ink/70"></div>
     </div>
 
-    <div class="mt-16 flex flex-col items-center gap-10 py-8 text-center md:py-16">
-      <AnimatedText
-        client:visible
-        as="p"
-        text={t.home.menuInvite}
-        textClassName="max-w-[26ch] font-serif text-2xl italic text-ink md:text-4xl"
-        underlineOffset="-bottom-4"
-      />
-      <a
-        href={path("/menu")}
-        class="group inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
-      >
-        {t.home.viewFullMenu}
-        <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-      </a>
+    <div class="relative mx-auto max-w-screen-xl px-6 py-20 md:py-28">
+      <div class="border-t border-white/20 pt-10">
+        <p class="mb-4 text-[11px] uppercase tracking-[0.3em] text-white/70">{t.home.featuredKicker}</p>
+        <h2 class="max-w-[22ch] text-balance font-serif text-3xl text-white md:text-5xl">
+          {t.home.featuredHeading} <span class="italic text-white/85">{t.home.featuredHeadingAccent}</span>
+        </h2>
+      </div>
+
+      <div class="mt-16 flex flex-col items-center gap-10 py-8 text-center md:py-16">
+        <AnimatedText
+          client:visible
+          as="p"
+          text={t.home.menuInvite}
+          textClassName="max-w-[26ch] font-serif text-2xl italic text-white md:text-4xl"
+          underlineOffset="-bottom-4"
+          underlineColor="bg-white/60"
+        />
+        <a
+          href={path("/menu")}
+          class="group inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink transition-colors hover:bg-accent hover:text-white"
+        >
+          {t.home.viewFullMenu}
+          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+        </a>
+      </div>
     </div>
   </section>
 
