@@ -130,6 +130,7 @@ export type Dictionary = {
     citiesTitle: string;
     mapTitle: string;
     mapBakeryLabel: string;
+    mapStopDaysLabel: string;
     mapStopNote: string;
     wholesaleKicker: string;
     wholesaleHeading: string;

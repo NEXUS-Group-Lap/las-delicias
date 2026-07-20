@@ -8,11 +8,23 @@ import {
   MapControls,
 } from "@/components/ui/mapcn-layer-markers";
 import { deliveryStops, bakeryLocation } from "@/data/deliveryStops";
+import { deliveryScheduleByDay } from "@/data/deliveryRoutes";
+
+type Lang = "en" | "es";
 
 type DeliveryStopsMapProps = {
   bakeryLabel: string;
+  daysLabel: string;
   stopNote: string;
+  lang: Lang;
 };
+
+function daysForCity(city: string, lang: Lang) {
+  return deliveryScheduleByDay
+    .filter((route) => route.cities.includes(city))
+    .map((route) => route.day[lang])
+    .join(", ");
+}
 
 // Roughly the state of Florida — keeps panning/zooming (and tile downloads) inside it.
 const FLORIDA_BOUNDS: [[number, number], [number, number]] = [
@@ -20,7 +32,7 @@ const FLORIDA_BOUNDS: [[number, number], [number, number]] = [
   [-79.7, 31.1],
 ];
 
-export default function DeliveryStopsMap({ bakeryLabel, stopNote }: DeliveryStopsMapProps) {
+export default function DeliveryStopsMap({ bakeryLabel, daysLabel, stopNote, lang }: DeliveryStopsMapProps) {
   return (
     <Map
       theme="light"
@@ -56,6 +68,9 @@ export default function DeliveryStopsMap({ bakeryLabel, stopNote }: DeliveryStop
           <MarkerLabel>{stop.city}</MarkerLabel>
           <MarkerPopup>
             <p className="font-medium">{stop.city}</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {daysLabel} {daysForCity(stop.city, lang)}
+            </p>
             <p className="mt-1 text-xs text-muted-foreground">{stopNote}</p>
           </MarkerPopup>
         </MapMarker>

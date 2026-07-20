@@ -69,7 +69,9 @@ const path = (base: string) => getLocalizedPath(base, lang);
       <DeliveryStopsMap
         client:visible
         bakeryLabel={t.delivery.mapBakeryLabel}
+        daysLabel={t.delivery.mapStopDaysLabel}
         stopNote={t.delivery.mapStopNote}
+        lang={lang}
       />
     </div>
   </section>
