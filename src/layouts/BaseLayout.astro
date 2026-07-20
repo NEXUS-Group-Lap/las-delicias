@@ -20,7 +20,7 @@ interface Props {
 const {
   lang = "en",
   title = `${site.name} | ${site.tagline[lang]}`,
-  description = `Visit ${site.name} in Fort Myers, FL for fresh Guatemalan bread, traditional breakfasts, Latin dishes, delivery routes, and catering for events.`,
+  description = `Visit ${site.name} in Fort Myers, FL for fresh Guatemalan bread, traditional breakfasts, Latin dishes, and scheduled delivery routes across Florida.`,
   image,
   noindex = false,
   includeHeader = true,
@@ -41,8 +41,8 @@ const localBusinessSchema = {
   name: site.name,
   description:
     lang === "es"
-      ? "Panadería y restaurante guatemalteco en Fort Myers, Florida. Pan guatemalteco fresco, comida tradicional, rutas de delivery y catering para eventos."
-      : "Guatemalan bakery and restaurant in Fort Myers, Florida serving fresh Guatemalan bread, traditional food, delivery routes, and catering for events.",
+      ? "Panadería y restaurante guatemalteco en Fort Myers, Florida. Pan guatemalteco fresco, comida tradicional y rutas de delivery programadas."
+      : "Guatemalan bakery and restaurant in Fort Myers, Florida serving fresh Guatemalan bread, traditional food, and scheduled delivery routes.",
   telephone: "+12399906760",
   email: site.email.display,
   address: {

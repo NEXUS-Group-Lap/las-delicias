@@ -10,7 +10,7 @@ export type Dictionary = {
     menu: { title: string; description: string };
     bakery: { title: string; description: string };
     delivery: { title: string; description: string };
-    catering: { title: string; description: string };
+    wholesale: { title: string; description: string };
     gallery: { title: string; description: string };
     contact: { title: string; description: string };
   };
@@ -19,7 +19,7 @@ export type Dictionary = {
     menu: string;
     bakery: string;
     delivery: string;
-    catering: string;
+    wholesale: string;
     gallery: string;
     contact: string;
   };
@@ -36,8 +36,8 @@ export type Dictionary = {
     menuTitle: string;
     followTitle: string;
     fullMenu: string;
-    catering: string;
     deliveryRoutes: string;
+    wholesale: string;
     contact: string;
     credit: string;
   };
@@ -45,7 +45,6 @@ export type Dictionary = {
     callNow: string;
     getDirections: string;
     viewMenu: string;
-    orderCatering: string;
     emailUs: string;
   };
   home: {
@@ -55,6 +54,7 @@ export type Dictionary = {
     heroSub: string;
     hoursNote: string;
     ctaDelivery: string;
+    locationKicker: string;
     featuredKicker: string;
     featuredHeading: string;
     featuredHeadingAccent: string;
@@ -74,11 +74,11 @@ export type Dictionary = {
     deliveryHeadingAccent: string;
     deliveryBody: string;
     seeCities: string;
-    cateringKicker: string;
-    cateringHeading: string;
-    cateringHeadingAccent: string;
-    cateringBody: string;
-    orderCateringLink: string;
+    wholesaleKicker: string;
+    wholesaleHeading: string;
+    wholesaleHeadingAccent: string;
+    wholesaleBody: string;
+    wholesaleLink: string;
     visitHeading: string;
   };
   menuPage: {
@@ -118,23 +118,42 @@ export type Dictionary = {
     headingAccent: string;
     intro: string;
     calloutStrong: string;
+    phonesTitle: string;
+    scheduleTitle: string;
+    scheduleNote: string;
+    viewByDay: string;
+    viewByCity: string;
+    today: string;
+    citySelectDefault: string;
+    cityHint: string;
+    cityResultLabel: string;
     citiesTitle: string;
     mapTitle: string;
     mapBakeryLabel: string;
     mapStopNote: string;
+    wholesaleKicker: string;
+    wholesaleHeading: string;
+    wholesaleHeadingAccent: string;
+    wholesaleBody: string;
+    wholesaleCta: string;
     endingHeading: string;
     endingBody: string;
     ctaConfirm: string;
   };
-  catering: {
+  wholesalePage: {
     kicker: string;
     heading: string;
     headingAccent: string;
     intro: string;
-    occasionsTitle: string;
-    occasions: { name: string }[];
+    benefitsKicker: string;
+    benefits: Block[];
+    stepsKicker: string;
+    steps: Block[];
+    citiesKicker: string;
+    citiesNote: string;
     endingHeading: string;
     endingBody: string;
+    cta: string;
   };
   gallery: {
     kicker: string;

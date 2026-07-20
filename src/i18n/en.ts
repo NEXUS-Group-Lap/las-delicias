@@ -5,7 +5,7 @@ export const en: Dictionary = {
     home: {
       title: "Panadería Las Delicias | Guatemalan Bakery & Restaurant in Fort Myers, FL",
       description:
-        "Visit Panadería Las Delicias in Fort Myers, FL for fresh Guatemalan bread, traditional breakfasts, Latin dishes, delivery routes, and catering for events.",
+        "Visit Panadería Las Delicias in Fort Myers, FL for fresh Guatemalan bread, traditional breakfasts, Latin dishes, and scheduled delivery routes across Florida.",
     },
     menu: {
       title: "Menu | Panadería Las Delicias — Fort Myers, FL",
@@ -22,14 +22,14 @@ export const en: Dictionary = {
       description:
         "Panadería Las Delicias offers scheduled delivery routes to selected cities across Florida. Call to confirm your city, delivery day, and schedule.",
     },
-    catering: {
-      title: "Catering & Event Orders | Panadería Las Delicias — Fort Myers, FL",
+    wholesale: {
+      title: "Wholesale | Panadería Las Delicias — Fort Myers, FL",
       description:
-        "Panadería Las Delicias offers catering and large food orders for family gatherings, parties, business events, church events, birthdays, and special occasions.",
+        "Sell Panadería Las Delicias bread in your store. Learn about our wholesale program, benefits, and how to become a stockist across Florida.",
     },
     gallery: {
       title: "Gallery | Panadería Las Delicias — Fort Myers, FL",
-      description: "A look at Panadería Las Delicias in Fort Myers, FL — bakery, food, and catering.",
+      description: "A look at Panadería Las Delicias in Fort Myers, FL — bakery, food, and delivery.",
     },
     contact: {
       title: "Contact | Panadería Las Delicias — Fort Myers, FL",
@@ -41,7 +41,7 @@ export const en: Dictionary = {
     menu: "Menu",
     bakery: "Bakery",
     delivery: "Delivery",
-    catering: "Catering",
+    wholesale: "Wholesale",
     gallery: "Gallery",
     contact: "Contact",
   },
@@ -58,8 +58,8 @@ export const en: Dictionary = {
     menuTitle: "Menu",
     followTitle: "Follow",
     fullMenu: "Full Menu",
-    catering: "Catering",
     deliveryRoutes: "Delivery Routes",
+    wholesale: "Sell Our Bread",
     contact: "Contact",
     credit: "Site by floresnexus.com",
   },
@@ -67,7 +67,6 @@ export const en: Dictionary = {
     callNow: "Call Now",
     getDirections: "Get Directions",
     viewMenu: "View Menu",
-    orderCatering: "Order Catering",
     emailUs: "Email Us",
   },
   home: {
@@ -75,9 +74,10 @@ export const en: Dictionary = {
     heroHeading: "Fresh Guatemalan bread.",
     heroHeadingAccent: "Guatemalan Bakery & Restaurant.",
     heroSub:
-      "Fresh Guatemalan bread, traditional breakfasts, antojitos, tamales, caldos, seafood, steaks and catering — at",
+      "Fresh Guatemalan bread, traditional breakfasts, antojitos, tamales, caldos, seafood, and steaks — at",
     hoursNote: "Open daily, 7 AM – 9 PM (Sat until 10 PM)",
     ctaDelivery: "Delivery Routes",
+    locationKicker: "Find Us",
     featuredKicker: "From our kitchen & bakery",
     featuredHeading: "Guatemalan food,",
     featuredHeadingAccent: "made like home.",
@@ -104,9 +104,9 @@ export const en: Dictionary = {
         copy: "Caldos, seafood, steaks and traditional plates, made the way they're meant to be.",
       },
       {
-        tag: "For every occasion",
-        name: "Catering for Any Occasion",
-        copy: "Birthdays, family gatherings, church and business events — we bring the food to your table.",
+        tag: "For retailers",
+        name: "Wholesale Bread Delivery",
+        copy: "We deliver fresh bread to more than 15 stores across Florida — ask about wholesale accounts.",
       },
     ],
     deliveryKicker: "Delivery Routes",
@@ -115,12 +115,12 @@ export const en: Dictionary = {
     deliveryBody:
       "Scheduled delivery routes available. Please call to confirm your city, delivery day, and time.",
     seeCities: "See delivery cities",
-    cateringKicker: "Catering & Events",
-    cateringHeading: "Bring Guatemalan flavor",
-    cateringHeadingAccent: "to your next event.",
-    cateringBody:
-      "Catering and large food orders for birthdays, family gatherings, church and business events.",
-    orderCateringLink: "Order catering",
+    wholesaleKicker: "Sell Our Bread",
+    wholesaleHeading: "Want to sell our bread",
+    wholesaleHeadingAccent: "in your store?",
+    wholesaleBody:
+      "Let us know. We deliver bread to more than 15 locations across Florida — let's talk about stocking your shelves.",
+    wholesaleLink: "See wholesale program",
     visitHeading: "Visit us today, or call ahead.",
   },
   menuPage: {
@@ -132,14 +132,14 @@ export const en: Dictionary = {
       "Prices may vary and are subject to change. Please call to confirm current menu and pricing.",
     jumpNavLabel: "Jump to menu category",
     bottomHeading: "Planning something bigger?",
-    bottomHeadingAccent: "Ask about catering.",
+    bottomHeadingAccent: "Call to place a large order.",
   },
   bakery: {
     kicker: "The Bakery",
     heading: "Fresh Guatemalan bread,",
     headingAccent: "every day.",
     intro:
-      "Panadería Las Delicias is a Guatemalan bakery and restaurant in Fort Myers, Florida, serving fresh Guatemalan bread, traditional breakfasts, Latin appetizers, soups, seafood, steaks, drinks, and catering for special events.",
+      "Panadería Las Delicias is a Guatemalan bakery and restaurant in Fort Myers, Florida, serving fresh Guatemalan bread, traditional breakfasts, Latin appetizers, soups, seafood, steaks, and drinks.",
     section2Kicker: "Fort Myers, FL",
     section2Heading: "Bread made the traditional way.",
     section2Body:
@@ -160,9 +160,9 @@ export const en: Dictionary = {
     ],
     specialtyKicker: "Our specialty",
     specialtyHeading: "Guatemalan bread, Guatemalan food,",
-    specialtyHeadingAccent: "and catering for your event.",
+    specialtyHeadingAccent: "for every occasion.",
     specialtyBody:
-      "From fresh bread to full catering trays, Panadería Las Delicias brings the flavors of Guatemala to Fort Myers — for a quick breakfast, a family dinner, or a celebration.",
+      "From fresh bread to full family meals, Panadería Las Delicias brings the flavors of Guatemala to Fort Myers — for a quick breakfast, a family dinner, or a celebration.",
     cakesKicker: "Custom Cakes",
     cakesHeading: "We also make",
     cakesHeadingAccent: "custom cakes.",
@@ -184,32 +184,70 @@ export const en: Dictionary = {
       "Panadería Las Delicias offers scheduled delivery routes to selected cities across Florida. Our vans visit different areas on specific days and times. Please call to confirm your city, delivery day, and schedule.",
     calloutStrong:
       "Routes and schedules vary by city and are not the same every week. Please call to confirm before planning your order.",
+    phonesTitle: "Delivery Lines",
+    scheduleTitle: "Delivery schedule by day",
+    scheduleNote: "Some Thursday and Friday routes extend into Georgia, Alabama, and Mississippi.",
+    viewByDay: "By day",
+    viewByCity: "By city",
+    today: "Today",
+    citySelectDefault: "Select your city",
+    cityHint: "Choose your city to see which days we deliver there.",
+    cityResultLabel: "Delivery days for",
     citiesTitle: "Cities we serve",
     mapTitle: "Where our vans stop",
     mapBakeryLabel: "Panadería Las Delicias",
     mapStopNote: "Scheduled delivery stop. Call to confirm the day and time.",
+    wholesaleKicker: "Sell Our Bread",
+    wholesaleHeading: "Want to sell",
+    wholesaleHeadingAccent: "our bread in your store?",
+    wholesaleBody:
+      "Let us know — we deliver bread to more than 15 locations, from Fort Myers and Naples to Miami, Orlando, and Jacksonville.",
+    wholesaleCta: "Call About Wholesale",
     endingHeading: "Call to confirm your route.",
     endingBody: "Call ahead to confirm your city, delivery day, and time.",
     ctaConfirm: "Call to Confirm Route",
   },
-  catering: {
-    kicker: "Catering & Event Orders",
-    heading: "Catering &",
-    headingAccent: "Event Orders.",
+  wholesalePage: {
+    kicker: "Sell Our Bread",
+    heading: "A wholesale partner",
+    headingAccent: "for your store.",
     intro:
-      "Bring the authentic flavor of Guatemala to your next event. Panadería Las Delicias offers catering and large food orders for family gatherings, parties, business events, church events, birthdays, and special occasions.",
-    occasionsTitle: "Perfect for",
-    occasions: [
-      { name: "Birthdays" },
-      { name: "Family gatherings" },
-      { name: "Church events" },
-      { name: "Business events" },
-      { name: "Private parties" },
-      { name: "Large orders" },
-      { name: "Custom cakes" },
+      "Panadería Las Delicias already delivers fresh Guatemalan bread on scheduled routes to more than 15 locations across Florida. We're always looking for new stores to add to the route.",
+    benefitsKicker: "Benefits",
+    benefits: [
+      {
+        n: "01",
+        h: "Fresh bread, baked daily",
+        p: "Every loaf is baked before it goes out for delivery, so your shelves get bread at its best.",
+      },
+      {
+        n: "02",
+        h: "Established delivery routes",
+        p: "We already run scheduled routes across Fort Myers, Naples, Miami, Orlando, Jacksonville, and more.",
+      },
+      {
+        n: "03",
+        h: "Authentic Guatemalan variety",
+        p: "Concha, pan francés, pan de yema, pan sellado, and more of the bread your customers are asking for.",
+      },
+      {
+        n: "04",
+        h: "A partner you can call",
+        p: "No online portal to fight with — just a direct line to coordinate schedule, quantities, and delivery day.",
+      },
     ],
-    endingHeading: "Call us to plan your order.",
-    endingBody: "We'll help you plan the right order for your event.",
+    stepsKicker: "How It Works",
+    steps: [
+      { n: "01", h: "Call or reach out", p: "Tell us about your store and where you're located." },
+      { n: "02", h: "We coordinate your route", p: "We match your store to a delivery day, schedule, and order size." },
+      { n: "03", h: "You start selling fresh bread", p: "Your first delivery arrives, and we keep the route running." },
+    ],
+    citiesKicker: "Where We Already Deliver",
+    citiesNote:
+      "We currently run wholesale delivery routes to stores across these areas — if your city isn't listed, call us and we'll see what we can do.",
+    endingHeading: "Ready to sell our bread?",
+    endingBody: "Call us to talk about your store, your city, and what a delivery schedule could look like.",
+    cta: "Call About Wholesale",
   },
   gallery: {
     kicker: "Gallery",

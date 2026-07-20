@@ -6,7 +6,7 @@
 
 Website for Panadería Las Delicias, a Guatemalan bakery and restaurant in Fort Myers, FL. Built on a static
 Astro theme, adapted for local SEO, two full language versions (English/Spanish) with a language switcher,
-delivery routes, and catering.
+and scheduled delivery routes.
 
 ## Tech Stack
 
@@ -66,8 +66,7 @@ flag it if one is missed.
 - `src/components/SiteHeader.astro` / `SiteFooter.astro` — navigation, phone CTA, language toggle, and footer
   NAP/social block.
 - `src/assets/gallery/` — real bakery/food photography, rendered via `astro:assets` `<Image>`.
-- `src/assets/stock/` — free-license Pexels photos (dough-kneading hands, catering trays) used where no real
-  photo exists yet.
+- `src/assets/stock/` — free-license Pexels photos (dough-kneading hands) used where no real photo exists yet.
 - `src/styles.css` — design tokens (cream/beige bakery palette + blue accent) and local fonts.
 
 ## Pages
@@ -77,8 +76,7 @@ flag it if one is missed.
 | `/`        | `/es`          | Home                                       |
 | `/menu`    | `/es/menu`     | Full menu by category                      |
 | `/bakery`  | `/es/bakery`   | Bakery story                               |
-| `/delivery`| `/es/delivery` | Delivery routes & cities                   |
-| `/catering`| `/es/catering` | Catering & event orders                    |
+| `/delivery`| `/es/delivery` | Delivery routes, cities & wholesale         |
 | `/gallery` | `/es/gallery`  | Photo gallery (real bakery & food photos)  |
 | `/contact` | `/es/contact`  | Address, phone, hours, social links        |
 
@@ -87,8 +85,7 @@ flag it if one is missed.
 - Real photography for the storefront facade and delivery vans — the home hero and delivery pages still use
   stand-in imagery (bread close-up / no image) since no real photo of the building or vans exists yet.
 - Final logo file (SVG/PNG transparent) — replace `public/favicon.svg`.
-- Confirmed current menu pricing, delivery schedules per city, catering minimums/lead time, and accepted
-  payment methods.
+- Confirmed current menu pricing, delivery schedules per city, and accepted payment methods.
 - Final production domain — update `astro.config.mjs` (`site`) and `src/pages/robots.txt.js`.
 
 ## SEO

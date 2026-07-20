@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/data/site.ts";
+import { getDictionary, getLocalizedPath } from "@/i18n/utils.ts";
+import type { Lang } from "@/i18n/types.ts";
+import wholesaleHero from "@/assets/gallery/pan3.png";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getDictionary(lang);
+const path = (base: string) => getLocalizedPath(base, lang);
+const photo = (en: string, es: string) => (lang === "es" ? `Foto: ${es}` : `Photo: ${en}`);
+---
+
+<BaseLayout lang={lang} title={t.meta.wholesale.title} description={t.meta.wholesale.description}>
+  <main id="main-content">
+  <section class="mx-auto max-w-screen-xl px-6 pb-12 pt-20 md:pb-16 md:pt-28">
+    <p class="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-faded">
+      <span class="inline-block h-px w-8 bg-ink/40"></span>
+      {t.wholesalePage.kicker}
+    </p>
+    <h1 class="max-w-[22ch] text-balance font-serif text-5xl leading-[0.95] md:text-7xl">
+      {t.wholesalePage.heading} <span class="italic text-accent">{t.wholesalePage.headingAccent}</span>
+    </h1>
+    <p class="mt-8 max-w-[60ch] text-lg leading-relaxed text-faded">{t.wholesalePage.intro}</p>
+    <a
+      href={site.deliveryPhones[0].href}
+      class="mt-8 inline-flex items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+    >
+      {t.wholesalePage.cta} — {site.deliveryPhones[0].display}
+    </a>
+  </section>
+
+  <section class="relative w-full">
+    <Image
+      src={wholesaleHero}
+      alt={photo("Fresh bread ready for wholesale delivery", "Pan fresco listo para reparto al por mayor")}
+      class="h-[45vh] w-full object-cover md:h-[60vh]"
+      widths={[768, 1200, 1920]}
+      sizes="100vw"
+    />
+  </section>
+
+  <section class="mx-auto mt-24 max-w-screen-xl border-t border-line px-6 pt-12 md:mt-32">
+    <p class="mb-12 text-[11px] uppercase tracking-[0.3em] text-faded">{t.wholesalePage.benefitsKicker}</p>
+    <div class="grid gap-x-8 gap-y-12 md:grid-cols-2">
+      {
+        t.wholesalePage.benefits.map((benefit) => (
+          <div class="space-y-3">
+            <p class="text-[10px] uppercase tracking-[0.3em] text-faded tabular-nums">{benefit.n}</p>
+            <h3 class="font-serif text-2xl">{benefit.h}</h3>
+            <p class="text-sm leading-relaxed text-faded">{benefit.p}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto mt-24 max-w-screen-xl border-t border-line px-6 pt-12 md:mt-32">
+    <p class="mb-12 text-[11px] uppercase tracking-[0.3em] text-faded">{t.wholesalePage.stepsKicker}</p>
+    <div class="grid gap-x-8 gap-y-12 md:grid-cols-3">
+      {
+        t.wholesalePage.steps.map((step) => (
+          <div class="space-y-3">
+            <p class="text-[10px] uppercase tracking-[0.3em] text-faded tabular-nums">{step.n}</p>
+            <h3 class="font-serif text-2xl">{step.h}</h3>
+            <p class="text-sm leading-relaxed text-faded">{step.p}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto mt-24 max-w-screen-xl border-t border-line px-6 pt-12 md:mt-32">
+    <p class="mb-4 text-[11px] uppercase tracking-[0.3em] text-faded">{t.wholesalePage.citiesKicker}</p>
+    <p class="max-w-[62ch] leading-relaxed text-faded">{t.wholesalePage.citiesNote}</p>
+    <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-faded">
+      {
+        site.deliveryCities.map((city) => (
+          <li class="rounded-full ring-1 ring-line px-4 py-2">{city}</li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mx-auto mb-32 mt-24 max-w-screen-xl border-t border-line px-6 pt-12">
+    <div class="grid items-end gap-10 md:grid-cols-12">
+      <div class="md:col-span-7">
+        <h2 class="max-w-[22ch] text-balance font-serif text-3xl leading-[1.02] md:text-5xl">
+          {t.wholesalePage.endingHeading}
+        </h2>
+        <p class="mt-4 max-w-[48ch] leading-relaxed text-faded">{t.wholesalePage.endingBody}</p>
+      </div>
+      <div class="flex flex-col flex-wrap gap-4 sm:flex-row md:col-span-5 md:justify-end">
+        <a
+          href={site.deliveryPhones[0].href}
+          class="inline-flex items-center justify-center gap-3 rounded-full bg-ink px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
+        >
+          {t.wholesalePage.cta} — {site.deliveryPhones[0].display}
+        </a>
+        <a
+          href={path("/delivery")}
+          class="inline-flex items-center justify-center gap-3 rounded-full px-7 py-4 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
+        >
+          {t.home.seeCities} →
+        </a>
+      </div>
+    </div>
+  </section>
+  </main>
+</BaseLayout>

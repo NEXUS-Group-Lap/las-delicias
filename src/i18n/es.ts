@@ -5,7 +5,7 @@ export const es: Dictionary = {
     home: {
       title: "Panadería Las Delicias | Panadería y Restaurante Guatemalteco en Fort Myers, FL",
       description:
-        "Visita Panadería Las Delicias en Fort Myers, FL. Pan guatemalteco fresco, desayunos tradicionales, comida latina, rutas de delivery y catering para eventos.",
+        "Visita Panadería Las Delicias en Fort Myers, FL. Pan guatemalteco fresco, desayunos tradicionales, comida latina y rutas de delivery programadas en Florida.",
     },
     menu: {
       title: "Menú | Panadería Las Delicias — Fort Myers, FL",
@@ -21,14 +21,14 @@ export const es: Dictionary = {
       description:
         "Panadería Las Delicias cuenta con rutas de delivery programadas hacia ciudades seleccionadas de Florida. Llámanos para confirmar tu ciudad, día y horario.",
     },
-    catering: {
-      title: "Catering y Pedidos para Eventos | Panadería Las Delicias — Fort Myers, FL",
+    wholesale: {
+      title: "Mayoreo | Panadería Las Delicias — Fort Myers, FL",
       description:
-        "Panadería Las Delicias ofrece catering y pedidos grandes para reuniones familiares, fiestas, eventos de trabajo, iglesias, cumpleaños y ocasiones especiales.",
+        "Vende el pan de Panadería Las Delicias en tu tienda. Conoce nuestro programa de mayoreo, beneficios y cómo ser un punto de venta en Florida.",
     },
     gallery: {
       title: "Galería | Panadería Las Delicias — Fort Myers, FL",
-      description: "Conoce Panadería Las Delicias en Fort Myers, FL — panadería, comida y catering.",
+      description: "Conoce Panadería Las Delicias en Fort Myers, FL — panadería, comida y delivery.",
     },
     contact: {
       title: "Contacto | Panadería Las Delicias — Fort Myers, FL",
@@ -40,7 +40,7 @@ export const es: Dictionary = {
     menu: "Menú",
     bakery: "Panadería",
     delivery: "Delivery",
-    catering: "Catering",
+    wholesale: "Mayoreo",
     gallery: "Galería",
     contact: "Contacto",
   },
@@ -57,8 +57,8 @@ export const es: Dictionary = {
     menuTitle: "Menú",
     followTitle: "Síguenos",
     fullMenu: "Menú Completo",
-    catering: "Catering",
     deliveryRoutes: "Rutas de Delivery",
+    wholesale: "Vende Nuestro Pan",
     contact: "Contacto",
     credit: "Sitio por floresnexus.com",
   },
@@ -66,7 +66,6 @@ export const es: Dictionary = {
     callNow: "Llamar Ahora",
     getDirections: "Cómo Llegar",
     viewMenu: "Ver Menú",
-    orderCatering: "Cotizar Catering",
     emailUs: "Escríbenos",
   },
   home: {
@@ -74,9 +73,10 @@ export const es: Dictionary = {
     heroHeading: "Pan fresco de Guatemala.",
     heroHeadingAccent: "Panadería y Restaurante Guatemalteco.",
     heroSub:
-      "Pan guatemalteco fresco, desayunos tradicionales, antojitos, tamales, caldos, mariscos, carnes y catering — en",
+      "Pan guatemalteco fresco, desayunos tradicionales, antojitos, tamales, caldos, mariscos y carnes — en",
     hoursNote: "Abierto a diario, 7 AM – 9 PM (sáb hasta 10 PM)",
     ctaDelivery: "Rutas de Delivery",
+    locationKicker: "Encuéntranos",
     featuredKicker: "De nuestra cocina y panadería",
     featuredHeading: "Comida guatemalteca,",
     featuredHeadingAccent: "hecha como en casa.",
@@ -102,9 +102,9 @@ export const es: Dictionary = {
         copy: "Caldos, mariscos, carnes y platos tradicionales, preparados como deben ser.",
       },
       {
-        tag: "Para toda ocasión",
-        name: "Catering para Cualquier Ocasión",
-        copy: "Cumpleaños, reuniones familiares, eventos de iglesia y de trabajo — llevamos la comida a tu mesa.",
+        tag: "Para tiendas",
+        name: "Venta de Pan al por Mayor",
+        copy: "Entregamos pan fresco a más de 15 tiendas en Florida — pregunta por cuentas al por mayor.",
       },
     ],
     deliveryKicker: "Rutas de Delivery",
@@ -113,12 +113,12 @@ export const es: Dictionary = {
     deliveryBody:
       "Contamos con rutas de delivery programadas. Llámanos para confirmar tu ciudad, día de entrega y horario.",
     seeCities: "Ver ciudades de delivery",
-    cateringKicker: "Catering y Eventos",
-    cateringHeading: "Lleva el sabor guatemalteco",
-    cateringHeadingAccent: "a tu próximo evento.",
-    cateringBody:
-      "Catering y pedidos grandes para cumpleaños, reuniones familiares, eventos de iglesia y de trabajo.",
-    orderCateringLink: "Cotizar catering",
+    wholesaleKicker: "Vende Nuestro Pan",
+    wholesaleHeading: "¿Quieres vender nuestro pan",
+    wholesaleHeadingAccent: "en tu tienda?",
+    wholesaleBody:
+      "Déjanos saber. Repartimos pan a más de 15 locales en Florida — hablemos de surtir tus estantes.",
+    wholesaleLink: "Ver programa de mayoreo",
     visitHeading: "Visítanos hoy, o llama antes.",
   },
   menuPage: {
@@ -129,14 +129,14 @@ export const es: Dictionary = {
     pricesNote: "Los precios pueden cambiar sin previo aviso. Llámanos para confirmar el menú y los precios.",
     jumpNavLabel: "Ir a categoría del menú",
     bottomHeading: "¿Planeas algo más grande?",
-    bottomHeadingAccent: "Pregunta por catering.",
+    bottomHeadingAccent: "Llámanos para pedidos grandes.",
   },
   bakery: {
     kicker: "La Panadería",
     heading: "Pan guatemalteco fresco,",
     headingAccent: "todos los días.",
     intro:
-      "Panadería Las Delicias es una panadería y restaurante guatemalteco en Fort Myers, Florida. Ofrecemos pan guatemalteco fresco, desayunos tradicionales, antojitos latinos, caldos, mariscos, carnes, bebidas y pedidos para eventos.",
+      "Panadería Las Delicias es una panadería y restaurante guatemalteco en Fort Myers, Florida. Ofrecemos pan guatemalteco fresco, desayunos tradicionales, antojitos latinos, caldos, mariscos, carnes y bebidas.",
     section2Kicker: "Fort Myers, FL",
     section2Heading: "Pan hecho a la manera tradicional.",
     section2Body:
@@ -157,9 +157,9 @@ export const es: Dictionary = {
     ],
     specialtyKicker: "Nuestra especialidad",
     specialtyHeading: "Pan guatemalteco, comida guatemalteca,",
-    specialtyHeadingAccent: "y catering para tu evento.",
+    specialtyHeadingAccent: "para cada ocasión.",
     specialtyBody:
-      "Desde pan fresco hasta bandejas completas de catering, Panadería Las Delicias lleva los sabores de Guatemala a Fort Myers — para un desayuno rápido, una cena familiar o una celebración.",
+      "Desde pan fresco hasta comidas familiares completas, Panadería Las Delicias lleva los sabores de Guatemala a Fort Myers — para un desayuno rápido, una cena familiar o una celebración.",
     cakesKicker: "Pasteles Personalizados",
     cakesHeading: "También hacemos",
     cakesHeadingAccent: "pasteles personalizados.",
@@ -181,32 +181,70 @@ export const es: Dictionary = {
       "Panadería Las Delicias cuenta con rutas de delivery programadas hacia diferentes ciudades de Florida. Nuestras vans visitan distintas zonas en días y horarios específicos. Llámanos para confirmar tu ciudad, día de entrega y horario.",
     calloutStrong:
       "Las rutas y horarios varían según la ciudad y no son iguales cada semana. Llámanos para confirmar antes de planear tu pedido.",
+    phonesTitle: "Líneas de Delivery",
+    scheduleTitle: "Rutas de entrega por día",
+    scheduleNote: "Algunas rutas de jueves y viernes llegan hasta Georgia, Alabama y Mississippi.",
+    viewByDay: "Por día",
+    viewByCity: "Por ciudad",
+    today: "Hoy",
+    citySelectDefault: "Selecciona tu ciudad",
+    cityHint: "Elige tu ciudad para ver qué días entregamos ahí.",
+    cityResultLabel: "Días de entrega para",
     citiesTitle: "Ciudades que servimos",
     mapTitle: "Dónde paran nuestras vans",
     mapBakeryLabel: "Panadería Las Delicias",
     mapStopNote: "Parada de entrega programada. Llama para confirmar el día y el horario.",
+    wholesaleKicker: "Vende Nuestro Pan",
+    wholesaleHeading: "¿Quieres vender",
+    wholesaleHeadingAccent: "nuestro pan en tu tienda?",
+    wholesaleBody:
+      "Déjanos saber — repartimos pan a más de 15 locales, desde Fort Myers y Naples hasta Miami, Orlando y Jacksonville.",
+    wholesaleCta: "Llamar sobre Ventas al por Mayor",
     endingHeading: "Llama para confirmar tu ruta.",
     endingBody: "Llámanos para confirmar tu ciudad, día de entrega y horario.",
     ctaConfirm: "Llamar para Confirmar Ruta",
   },
-  catering: {
-    kicker: "Catering y Pedidos para Eventos",
-    heading: "Catering y Pedidos",
-    headingAccent: "para Eventos.",
+  wholesalePage: {
+    kicker: "Vende Nuestro Pan",
+    heading: "Un socio de mayoreo",
+    headingAccent: "para tu tienda.",
     intro:
-      "Lleva el auténtico sabor guatemalteco a tu próximo evento. En Panadería Las Delicias ofrecemos catering y pedidos grandes para reuniones familiares, fiestas, eventos de trabajo, iglesias, cumpleaños y ocasiones especiales.",
-    occasionsTitle: "Ideal para",
-    occasions: [
-      { name: "Cumpleaños" },
-      { name: "Reuniones familiares" },
-      { name: "Eventos de iglesia" },
-      { name: "Eventos de trabajo" },
-      { name: "Fiestas privadas" },
-      { name: "Pedidos grandes" },
-      { name: "Pasteles personalizados" },
+      "Panadería Las Delicias ya reparte pan guatemalteco fresco en rutas programadas a más de 15 locales en Florida. Siempre estamos buscando nuevas tiendas para sumar a la ruta.",
+    benefitsKicker: "Beneficios",
+    benefits: [
+      {
+        n: "01",
+        h: "Pan fresco, horneado a diario",
+        p: "Cada pieza se hornea antes de salir a reparto, para que tus estantes reciban el pan en su mejor momento.",
+      },
+      {
+        n: "02",
+        h: "Rutas de entrega ya establecidas",
+        p: "Ya operamos rutas programadas por Fort Myers, Naples, Miami, Orlando, Jacksonville y más.",
+      },
+      {
+        n: "03",
+        h: "Variedad guatemalteca auténtica",
+        p: "Concha, pan francés, pan de yema, pan sellado y más del pan que tus clientes están buscando.",
+      },
+      {
+        n: "04",
+        h: "Un socio al que puedes llamar",
+        p: "Sin portal en línea que pelear — solo una línea directa para coordinar horario, cantidades y día de entrega.",
+      },
     ],
-    endingHeading: "Llámanos para coordinar tu pedido.",
-    endingBody: "Te ayudamos a planear el pedido ideal para tu evento.",
+    stepsKicker: "Cómo Funciona",
+    steps: [
+      { n: "01", h: "Llama o escríbenos", p: "Cuéntanos sobre tu tienda y dónde está ubicada." },
+      { n: "02", h: "Coordinamos tu ruta", p: "Asignamos tu tienda a un día de entrega, horario y tamaño de pedido." },
+      { n: "03", h: "Empiezas a vender pan fresco", p: "Llega tu primera entrega y mantenemos la ruta en marcha." },
+    ],
+    citiesKicker: "Dónde Ya Entregamos",
+    citiesNote:
+      "Actualmente operamos rutas de entrega al por mayor hacia tiendas en estas zonas — si tu ciudad no aparece, llámanos y vemos qué podemos hacer.",
+    endingHeading: "¿Listo para vender nuestro pan?",
+    endingBody: "Llámanos para hablar sobre tu tienda, tu ciudad y cómo podría verse un horario de entrega.",
+    cta: "Llamar sobre Ventas al por Mayor",
   },
   gallery: {
     kicker: "Galería",

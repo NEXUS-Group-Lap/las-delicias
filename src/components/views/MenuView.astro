@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { menuCategories } from "@/data/menu.ts";
 import { site } from "@/data/site.ts";
-import { getDictionary, getLocalizedPath } from "@/i18n/utils.ts";
+import { getDictionary } from "@/i18n/utils.ts";
 import type { Lang } from "@/i18n/types.ts";
 
 interface Props {
@@ -11,7 +11,6 @@ interface Props {
 
 const { lang = "en" } = Astro.props as Props;
 const t = getDictionary(lang);
-const path = (base: string) => getLocalizedPath(base, lang);
 ---
 
 <BaseLayout lang={lang} title={t.meta.menu.title} description={t.meta.menu.description}>
@@ -72,12 +71,6 @@ const path = (base: string) => getLocalizedPath(base, lang);
           class="inline-flex items-center justify-center gap-3 rounded-full bg-ink px-6 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--color-base)] transition-colors hover:bg-accent"
         >
           {t.common.callNow}
-        </a>
-        <a
-          href={path("/catering")}
-          class="inline-flex items-center justify-center gap-3 rounded-full px-6 py-3.5 text-[11px] font-medium uppercase tracking-[0.2em] text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-[var(--color-base)] hover:ring-accent"
-        >
-          {t.common.orderCatering}
         </a>
         <a
           href={site.mapsUrl}

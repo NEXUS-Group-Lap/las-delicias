@@ -20,7 +20,7 @@ const isActive = (href = "") => {
   return currentPath.startsWith(href);
 };
 
-const basePaths = ["/", "/menu", "/bakery", "/delivery", "/catering", "/gallery", "/contact"] as const;
+const basePaths = ["/", "/menu", "/bakery", "/delivery", "/wholesale", "/gallery", "/contact"] as const;
 const navItems = basePaths.map((base) => ({
   href: getLocalizedPath(base, lang),
   label: t.nav[
